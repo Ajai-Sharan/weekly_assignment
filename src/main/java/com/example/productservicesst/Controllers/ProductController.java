@@ -27,25 +27,27 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getProductById(@PathVariable("id") Long id){
+    public Product getProductById(@PathVariable("id") Long id){
 
 //            throw new RuntimeException("Something went wrong in Controller");
 
-        ResponseEntity responseEntity;
+//        ResponseEntity responseEntity;
+//
+//
+//            try {
+//
+//                Product product = fakeStoreProductService.getProductById(id);
+//                responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+//                return responseEntity;
+//            }catch (RuntimeException ex){
+//                Exceptiondtos exceptiondtos = new Exceptiondtos();
+//                exceptiondtos.setMessage("Something went wrong in Service");
+//                exceptiondtos.setResolution("Switch off your PC. Do something productive");
+//                responseEntity = new ResponseEntity<>(exceptiondtos,HttpStatus.BAD_REQUEST);
+//                return responseEntity;
+//            }
 
-
-            try {
-
-                Product product = fakeStoreProductService.getProductById(id);
-                responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
-                return responseEntity;
-            }catch (RuntimeException ex){
-                Exceptiondtos exceptiondtos = new Exceptiondtos();
-                exceptiondtos.setMessage("Something went wrong in Service");
-                exceptiondtos.setResolution("Switch off your PC. Do something productive");
-                responseEntity = new ResponseEntity<>(exceptiondtos,HttpStatus.BAD_REQUEST);
-                return responseEntity;
-            }
+        return fakeStoreProductService.getProductById(id);
 
     }
 
