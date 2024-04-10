@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PageNotFound.class)
     public ResponseEntity<Exceptiondtos> handlePageNotFoundException(PageNotFound pageNotFound){
         Exceptiondtos exceptiondtos = new Exceptiondtos();
-        exceptiondtos.setMessage("Invalid id "+ pageNotFound.getId()+" passed");
+        exceptiondtos.setMessage("Invalid id "+ pageNotFound.getId1()+" passed");
         exceptiondtos.setResolution("please visit other website");
         ResponseEntity<Exceptiondtos> response =  new ResponseEntity<>(exceptiondtos, HttpStatus.BAD_REQUEST);
         return response;
