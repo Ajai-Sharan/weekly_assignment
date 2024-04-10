@@ -7,6 +7,10 @@ import com.example.productservicesst.dtos.FakeStoreProductDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 //import java.util.List;
 
 @Service
@@ -16,26 +20,41 @@ public class FakeStoreProductService implements ProductService{
 
     @Override
     public Product getProductById(Long id) {
-        RestTemplate restTemplate = new RestTemplate();
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDto.class);
 
-        if(fakeStoreProductDto == null){
-            return null;
+        throw new RuntimeException("Something went wrong in Service");
+
+//        RestTemplate restTemplate = new RestTemplate();
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDto.class);
+//
+//        if(fakeStoreProductDto == null){
+//            return null;
+//        }
+//
+//        return ConvertFakeStoreToProduct(fakeStoreProductDto);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        RestTemplate restTemplate = new RestTemplate();
+        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products", FakeStoreProductDto[].class);
+        List<Product> products = new ArrayList<>();
+
+        for (int i = 0; i < fakeStoreProductDtos.length; i++) {
+            if(fakeStoreProductDtos[i] == null){
+                products.add(null);
+            }
+            assert fakeStoreProductDtos[i] != null;
+            products.add(ConvertFakeStoreToProduct(fakeStoreProductDtos[i]));
         }
 
 
+        return products;
 
 
 
 
-
-        return ConvertFakeStoreToProduct(fakeStoreProductDto);
     }
 
-//    @Override
-//    public List<Product> getAllProducts() {
-//        return null;
-//    }
 
     private Product ConvertFakeStoreToProduct(FakeStoreProductDto fakeStoreProductDto){
         Product product = new Product();
