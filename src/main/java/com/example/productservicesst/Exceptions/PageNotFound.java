@@ -8,11 +8,11 @@ import lombok.Setter;
 @Setter
 
 public class PageNotFound extends RuntimeException{
-    private Long id;
+    private Long id1;
 
     public  PageNotFound(Long id, String message){
         super(message);
-        this.id = id;
+        this.id1 = id;
     }
 
 
