@@ -1,6 +1,7 @@
 package com.example.productservicesst.Exception;
 
 
+import com.example.productservicesst.Exceptions.PageNotFound;
 import com.example.productservicesst.dtos.Exceptiondtos;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -30,10 +31,19 @@ public class GlobalExceptionHandler {
         return response;
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Exceptiondtos> handleGeneralException(){
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Exceptiondtos> handleGeneralException(){
+//        Exceptiondtos exceptiondtos = new Exceptiondtos();
+//        exceptiondtos.setMessage("I did not write code for this error. Please figure it out by yourself");
+//        exceptiondtos.setResolution("please visit other website");
+//        ResponseEntity<Exceptiondtos> response =  new ResponseEntity<>(exceptiondtos, HttpStatus.BAD_REQUEST);
+//        return response;
+//    }
+
+    @ExceptionHandler(PageNotFound.class)
+    public ResponseEntity<Exceptiondtos> handlePageNotFoundException(PageNotFound pageNotFound){
         Exceptiondtos exceptiondtos = new Exceptiondtos();
-        exceptiondtos.setMessage("I did not write code for this error. Please figure it out by yourself");
+        exceptiondtos.setMessage("Invalid id "+ pageNotFound.getId()+" passed");
         exceptiondtos.setResolution("please visit other website");
         ResponseEntity<Exceptiondtos> response =  new ResponseEntity<>(exceptiondtos, HttpStatus.BAD_REQUEST);
         return response;

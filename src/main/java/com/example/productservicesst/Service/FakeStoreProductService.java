@@ -1,5 +1,6 @@
 package com.example.productservicesst.Service;
 
+import com.example.productservicesst.Exceptions.PageNotFound;
 import com.example.productservicesst.Models.Category;
 import com.example.productservicesst.Models.Product;
 import com.example.productservicesst.dtos.FakeStoreProductDto;
@@ -21,22 +22,15 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public Product getProductById(Long id) {
 
-//        throw new RuntimeException("Something went wrong in Service");
 
-//        Arithmatic
-//        int x = 1/0;
+        RestTemplate restTemplate = new RestTemplate();
+        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDto.class);
 
-//        Runtime error
-        throw new RuntimeException();
+        if(fakeStoreProductDto == null){
+            throw new PageNotFound(id, "Please enter valid product id");
+        }
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDto.class);
-//
-//        if(fakeStoreProductDto == null){
-//            return null;
-//        }
-//
-//        return ConvertFakeStoreToProduct(fakeStoreProductDto);
+        return ConvertFakeStoreToProduct(fakeStoreProductDto);
     }
 
     @Override
