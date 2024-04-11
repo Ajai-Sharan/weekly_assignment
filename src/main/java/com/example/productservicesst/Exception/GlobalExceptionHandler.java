@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Exceptiondtos> handleArithmeticException(){
         Exceptiondtos exceptiondtos = new Exceptiondtos();
         exceptiondtos.setMessage("Something went wrong");
-        exceptiondtos.setResolution("If you run the code, it will provide undefined solution");
+        exceptiondtos.setResolution("Go and Revise 5th std math");
         ResponseEntity<Exceptiondtos> response =  new ResponseEntity<>(exceptiondtos, HttpStatus.BAD_REQUEST);
         return response;
     }

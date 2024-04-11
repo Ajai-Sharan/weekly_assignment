@@ -13,4 +13,6 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
+    Product createNewProduct(Product product);
+
 }

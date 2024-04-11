@@ -14,7 +14,7 @@ import java.util.List;
 
 //import java.util.List;
 
-@Service
+@Service("FakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
 
@@ -53,6 +53,11 @@ public class FakeStoreProductService implements ProductService{
 
 
 
+    }
+
+    @Override
+    public Product createNewProduct(Product product) {
+        return null;
     }
 
 

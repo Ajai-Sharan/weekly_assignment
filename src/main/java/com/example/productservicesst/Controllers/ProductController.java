@@ -6,12 +6,10 @@ import com.example.productservicesst.Service.FakeStoreProductService;
 //import org.springframework.http.RequestEntity;
 import com.example.productservicesst.Service.ProductService;
 import com.example.productservicesst.dtos.Exceptiondtos;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -20,10 +18,16 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final FakeStoreProductService fakeStoreProductService;
+//    private final FakeStoreProductService fakeStoreProductService;
+//
+//    ProductController(FakeStoreProductService fakeStoreProductService){
+//        this.fakeStoreProductService = fakeStoreProductService;
+//    }
 
-    ProductController(FakeStoreProductService fakeStoreProductService){
-        this.fakeStoreProductService = fakeStoreProductService;
+    private ProductService productService;
+
+    ProductController(@Qualifier("selfProductService") ProductService productService){
+        this.productService = productService;
     }
 
     @GetMapping("/{id}")
@@ -47,13 +51,21 @@ public class ProductController {
 //                return responseEntity;
 //            }
 
-        return fakeStoreProductService.getProductById(id);
+        return productService.getProductById(id);
 
     }
 
     @GetMapping("")
     public List<Product> getAllProducts(){
-        return fakeStoreProductService.getAllProducts();
+        return productService.getAllProducts();
+    }
+
+    @PostMapping("")
+    public Product createNewProduct(@RequestBody Product product){
+        return productService.createNewProduct(product);
+    }
+    public Product updateProduct(@RequestBody Product product){
+        return productService.createNewProduct(product);
     }
 
 }
