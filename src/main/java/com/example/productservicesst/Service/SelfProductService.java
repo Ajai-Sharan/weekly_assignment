@@ -5,13 +5,14 @@ import com.example.productservicesst.Models.Category;
 import com.example.productservicesst.Models.Product;
 import com.example.productservicesst.Repository.CategoryRepository;
 import com.example.productservicesst.Repository.ProductRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.Port;
 import java.util.List;
 import java.util.Optional;
 
-
+@Primary
 @Service("selfProductService")
 public class SelfProductService implements ProductService{
 

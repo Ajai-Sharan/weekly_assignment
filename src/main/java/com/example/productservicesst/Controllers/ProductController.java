@@ -51,7 +51,9 @@ public class ProductController {
 //                return responseEntity;
 //            }
 
-        return productService.getProductById(id);
+        Product outputProduct = productService.getProductById(id);
+        outputProduct.setImageUrl("Sample ImageURL");
+        return outputProduct;
 
     }
 
